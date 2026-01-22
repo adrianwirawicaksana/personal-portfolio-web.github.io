@@ -1,11 +1,11 @@
-<p align="center">
-  <h1 style="font-size: 80px; font-weight: bold; color: #FF0000; text-shadow: 3px 3px 6px #000000; margin: 0;">
+<div align="center">
+  <span style="font-size: 80px; font-weight: bold; color: #FF0000; text-shadow: 3px 3px 6px #000000;">
     COMING SOON!!
-  </h1>
-</p>
+  </span>
+</div>
 
-<p align="center">
+<div align="center">
   <em style="color: #555555; font-size: 24px;">
     Something amazing is on the way. Stay tuned!
   </em>
-</p>
+</div>
