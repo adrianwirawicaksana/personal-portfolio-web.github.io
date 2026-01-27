@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adrian Wira Wicaksana - AI Engineer & Data Scientist</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            --primary: #00ff88;
+            --secondary: #00d4ff;
+            --accent: #ff0080;
+            --dark: #0a0e1a;
+            --darker: #050810;
+            --light: #f0f4ff;
+        }
+        
+        body {
+            font-family: 'JetBrains Mono', monospace;
+            background: var(--dark);
+            color: var(--light);
+            overflow-x: hidden;
+        }
+        
+        h1, h2, h3, h4, h5 {
+            font-family: 'Syne', sans-serif;
+        }
+        
+        /* Animated Background Grid */
+        .grid-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(rgba(0, 255, 136, 0.03) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(0, 255, 136, 0.03) 1px, transparent 1px);
+            background-size: 50px 50px;
+            animation: gridMove 20s linear infinite;
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        @keyframes gridMove {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+        
+        /* Gradient Orbs */
+        .orb {
+            position: absolute;
+            border-radius: 50%;
+            filter: blur(80px);
+            opacity: 0.3;
+            animation: float 20s ease-in-out infinite;
+            pointer-events: none;
+        }
+        
+        .orb-1 {
+            top: 10%;
+            left: 20%;
+            width: 400px;
+            height: 400px;
+            background: radial-gradient(circle, var(--primary), transparent);
+            animation-delay: 0s;
+        }
+        
+        .orb-2 {
+            top: 60%;
+            right: 15%;
+            width: 500px;
+            height: 500px;
+            background: radial-gradient(circle, var(--secondary), transparent);
+            animation-delay: 7s;
+        }
+        
+        .orb-3 {
+            bottom: 10%;
+            left: 40%;
+            width: 350px;
+            height: 350px;
+            background: radial-gradient(circle, var(--accent), transparent);
+            animation-delay: 14s;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+        
+        /* Glitch Effect */
+        .glitch {
+            position: relative;
+            animation: glitch-skew 5s infinite;
+        }
+        
+        @keyframes glitch-skew {
+            0%, 90%, 100% { transform: skew(0deg); }
+            91% { transform: skew(-2deg); }
+            93% { transform: skew(2deg); }
+            95% { transform: skew(-1deg); }
+        }
+        
+        /* Card Hover Effect */
+        .tech-card {
+            position: relative;
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 255, 136, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .tech-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: inherit;
+        }
+        
+        .tech-card:hover {
+            transform: translateY(-8px);
+            border-color: var(--primary);
+            box-shadow: 0 20px 40px rgba(0, 255, 136, 0.2);
+        }
+        
+        .tech-card:hover::before {
+            opacity: 0.05;
+        }
+        
+        /* Typing Animation */
+        .typing {
+            overflow: hidden;
+            border-right: 3px solid var(--primary);
+            white-space: nowrap;
+            animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite;
+            display: inline-block;
+        }
+        
+        @keyframes typing {
+            from { width: 0; }
+            to { width: 100%; }
+        }
+        
+        @keyframes blink-caret {
+            from, to { border-color: transparent; }
+            50% { border-color: var(--primary); }
+        }
+        
+        /* Scroll Reveal */
+        .reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Navigation */
+        nav {
+            backdrop-filter: blur(20px);
+            background: rgba(10, 14, 26, 0.8);
+            border-bottom: 1px solid rgba(0, 255, 136, 0.1);
+        }
+        
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: var(--darker);
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: linear-gradient(180deg, var(--primary), var(--secondary));
+            border-radius: 5px;
+        }
+        
+        /* Badge Animation */
+        .badge {
+            display: inline-block;
+            padding: 0.5rem 1rem;
+            background: rgba(0, 255, 136, 0.1);
+            border: 1px solid var(--primary);
+            border-radius: 50px;
+            font-size: 0.875rem;
+            transition: all 0.3s ease;
+        }
+        
+        .badge:hover {
+            background: var(--primary);
+            color: var(--darker);
+            transform: scale(1.05);
+        }
+        
+        /* Project Card Animation */
+        .project-card {
+            background: rgba(255, 255, 255, 0.02);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 212, 255, 0.1);
+            transition: all 0.4s ease;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .project-card::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(0, 212, 255, 0.1), transparent);
+            transform: rotate(45deg);
+            transition: all 0.6s ease;
+        }
+        
+        .project-card:hover::after {
+            animation: shine 1.5s ease-in-out;
+        }
+        
+        @keyframes shine {
+            0% { transform: translateX(-100%) translateY(-100%) rotate(45deg); }
+            100% { transform: translateX(100%) translateY(100%) rotate(45deg); }
+        }
+        
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: var(--secondary);
+            box-shadow: 0 15px 30px rgba(0, 212, 255, 0.3);
+        }
+        
+        /* Button Styles */
+        .btn-primary {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: var(--darker);
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .btn-primary::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 0;
+            height: 0;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            transform: translate(-50%, -50%);
+            transition: width 0.6s, height 0.6s;
+        }
+        
+        .btn-primary:hover::before {
+            width: 300px;
+            height: 300px;
+        }
+        
+        .btn-primary:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(0, 255, 136, 0.4);
+        }
+        
+        /* Skill Bar Animation */
+        .skill-bar {
+            height: 4px;
+            background: rgba(0, 255, 136, 0.1);
+            border-radius: 2px;
+            overflow: hidden;
+            margin-top: 0.5rem;
+        }
+        
+        .skill-progress {
+            height: 100%;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+            animation: progressLoad 2s ease-out forwards;
+            transform-origin: left;
+        }
+        
+        @keyframes progressLoad {
+            from { transform: scaleX(0); }
+            to { transform: scaleX(1); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Background Effects -->
+    <div class="grid-bg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="glitch">
+                    <h1 class="text-2xl font-bold" style="font-family: 'Syne', sans-serif;">
+                        <span style="color: var(--primary);">&lt;</span>Portfolio<span style="color: var(--primary);">/&gt;</span>
+                    </h1>
+                </div>
+                <div class="hidden md:flex space-x-8">
+                    <a href="#home" class="hover:text-[var(--primary)] transition-colors">Home</a>
+                    <a href="#about" class="hover:text-[var(--primary)] transition-colors">About</a>
+                    <a href="#skills" class="hover:text-[var(--primary)] transition-colors">Skills</a>
+                    <a href="#projects" class="hover:text-[var(--primary)] transition-colors">Projects</a>
+                    <a href="#contact" class="hover:text-[var(--primary)] transition-colors">Contact</a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative min-h-screen flex items-center justify-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <div class="mb-6">
+                    <span class="badge">📚 Keep Learning</span>
+                </div>
+                <h1 class="text-6xl md:text-8xl font-bold mb-6" style="font-family: 'Syne', sans-serif;">
+                    <span class="block text-[var(--light)]">Adrian Wira</span>
+                    <span class="block typing" style="color: var(--primary);">Wicaksana</span>
+                </h1>
+                <p class="text-xl md:text-2xl mb-4 text-gray-300">
+                    AI Engineer Enthusiast <span style="color: var(--primary);">|</span> 
+                    Data Scientist Enthusiast <span style="color: var(--secondary);">|</span> 
+                    Backend Developer
+                </p>
+                <p class="text-lg text-gray-400 mb-8">
+                    Student at STEKOM University
+                </p>
+                <div class="flex justify-center space-x-4">
+                    <a href="#projects" class="btn-primary">
+                        <span class="relative z-10">My Project</span>
+                    </a>
+                    <a href="#contact" class="px-8 py-4 border-2 rounded-full transition-all hover:border-[var(--primary)] hover:bg-[rgba(0,255,136,0.1)]" style="border-color: var(--primary);">
+                        Get In Touch
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="relative py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="reveal">
+                <h2 class="text-5xl md:text-6xl font-bold mb-16 text-center" style="font-family: 'Syne', sans-serif;">
+                    About <span style="color: var(--primary);">Me</span>
+                </h2>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div class="reveal">
+                    <div class="tech-card p-8 rounded-2xl">
+                        <h3 class="text-3xl font-bold mb-4" style="color: var(--primary);">Who I Am</h3>
+                        <p class="text-gray-300 mb-4 leading-relaxed">
+                            Passionate about leveraging artificial intelligence and data science to solve real-world problems. 
+                            Currently pursuing my degree at Universitas Sains dan Teknologi Komputer (STEKOM University), 
+                            I'm constantly exploring the intersection of machine learning, backend development, and innovative tech solutions.
+                        </p>
+                        <p class="text-gray-300 leading-relaxed">
+                            My journey in tech is driven by curiosity and a commitment to continuous learning. 
+                            From building neural networks to crafting efficient backend systems, 
+                            I thrive on turning complex challenges into elegant solutions.
+                        </p>
+                    </div>
+                </div>
+                
+                <div class="reveal space-y-6">
+                    <div class="tech-card p-6 rounded-xl">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: rgba(0, 255, 136, 0.2);">
+                                <span class="text-2xl">🤖</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">AI Engineering</h4>
+                                <p class="text-sm text-gray-400">Building intelligent systems</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card p-6 rounded-xl">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: rgba(0, 212, 255, 0.2);">
+                                <span class="text-2xl">📊</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Data Science</h4>
+                                <p class="text-sm text-gray-400">Extracting insights from data</p>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="tech-card p-6 rounded-xl">
+                        <div class="flex items-center mb-3">
+                            <div class="w-12 h-12 rounded-full flex items-center justify-center mr-4" style="background: rgba(255, 0, 128, 0.2);">
+                                <span class="text-2xl">⚙️</span>
+                            </div>
+                            <div>
+                                <h4 class="font-bold text-lg">Backend Development</h4>
+                                <p class="text-sm text-gray-400">Scalable server solutions</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Skills Section -->
+    <section id="skills" class="relative py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="reveal">
+                <h2 class="text-5xl md:text-6xl font-bold mb-16 text-center" style="font-family: 'Syne', sans-serif;">
+                    Tech <span style="color: var(--secondary);">Stack</span>
+                </h2>
+            </div>
+
+            <!-- Machine Learning & AI -->
+            <div class="reveal mb-16">
+                <h3 class="text-3xl font-bold mb-8" style="color: var(--primary);">🤖 Machine Learning & AI</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🐍</div>
+                        <div class="font-semibold">Python</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🔥</div>
+                        <div class="font-semibold">PyTorch</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🧠</div>
+                        <div class="font-semibold">TensorFlow</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">📊</div>
+                        <div class="font-semibold">Scikit-Learn</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🔢</div>
+                        <div class="font-semibold">NumPy</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🐼</div>
+                        <div class="font-semibold">Pandas</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 88%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Backend Development -->
+            <div class="reveal mb-16">
+                <h3 class="text-3xl font-bold mb-8" style="color: var(--secondary);">⚙️ Backend Development</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">📗</div>
+                        <div class="font-semibold">Node.js</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🐘</div>
+                        <div class="font-semibold">PHP</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🍃</div>
+                        <div class="font-semibold">MongoDB</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🐘</div>
+                        <div class="font-semibold">PostgreSQL</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 82%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Frontend Development -->
+            <div class="reveal mb-16">
+                <h3 class="text-3xl font-bold mb-8" style="color: var(--accent);">🎨 Frontend Development</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">⚛️</div>
+                        <div class="font-semibold">React</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">▲</div>
+                        <div class="font-semibold">Next.js</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 80%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🎨</div>
+                        <div class="font-semibold">Tailwind CSS</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">💛</div>
+                        <div class="font-semibold">JavaScript</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 88%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🟧</div>
+                        <div class="font-semibold">HTML5</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 95%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🔷</div>
+                        <div class="font-semibold">CSS3</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tools & Technologies -->
+            <div class="reveal">
+                <h3 class="text-3xl font-bold mb-8" style="color: var(--primary);">🛠️ Tools & Technologies</h3>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🔧</div>
+                        <div class="font-semibold">Git</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🐙</div>
+                        <div class="font-semibold">GitHub</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 90%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🐳</div>
+                        <div class="font-semibold">Docker</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 75%;"></div></div>
+                    </div>
+                    <div class="tech-card p-4 rounded-lg text-center">
+                        <div class="text-3xl mb-2">🐧</div>
+                        <div class="font-semibold">Linux</div>
+                        <div class="skill-bar"><div class="skill-progress" style="width: 85%;"></div></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Projects Section -->
+    <section id="projects" class="relative py-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="reveal">
+                <h2 class="text-5xl md:text-6xl font-bold mb-16 text-center" style="font-family: 'Syne', sans-serif;">
+                    Featured <span style="color: var(--accent);">Projects</span>
+                </h2>
+            </div>
+
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Project 1 -->
+                <div class="reveal project-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-4xl">📱</span>
+                        <a href="https://github.com/adrianwirawicaksana/personal-portfolio-web.github.io" target="_blank" class="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">Personal Portfolio</h3>
+                    <p class="text-gray-400 mb-4">Interactive portfolio website showcasing my work and skills with modern design.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-[rgba(0,255,136,0.1)] rounded-full text-sm" style="color: var(--primary);">HTML</span>
+                        <span class="px-3 py-1 bg-[rgba(0,212,255,0.1)] rounded-full text-sm" style="color: var(--secondary);">CSS</span>
+                        <span class="px-3 py-1 bg-[rgba(255,0,128,0.1)] rounded-full text-sm" style="color: var(--accent);">JavaScript</span>
+                    </div>
+                </div>
+
+                <!-- Project 2 -->
+                <div class="reveal project-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-4xl">☕</span>
+                        <a href="https://github.com/adrianwirawicaksana/mysqliReport" target="_blank" class="text-[var(--secondary)] hover:text-[var(--primary)] transition-colors">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">MySQLi Report System</h3>
+                    <p class="text-gray-400 mb-4">Student data application using MySQL and iReport library for OOP final exam.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-[rgba(0,255,136,0.1)] rounded-full text-sm" style="color: var(--primary);">Java</span>
+                        <span class="px-3 py-1 bg-[rgba(0,212,255,0.1)] rounded-full text-sm" style="color: var(--secondary);">MySQL</span>
+                        <span class="px-3 py-1 bg-[rgba(255,0,128,0.1)] rounded-full text-sm" style="color: var(--accent);">iReport</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 - Placeholder -->
+                <div class="reveal project-card p-6 rounded-2xl">
+                    <div class="flex items-center justify-between mb-4">
+                        <span class="text-4xl">🤖</span>
+                        <span class="text-[var(--secondary)]">
+                            <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
+                                <path d="M12 0c-6.626 0-12 5.373-12 12 0 5.302 3.438 9.8 8.207 11.387.599.111.793-.261.793-.577v-2.234c-3.338.726-4.033-1.416-4.033-1.416-.546-1.387-1.333-1.756-1.333-1.756-1.089-.745.083-.729.083-.729 1.205.084 1.839 1.237 1.839 1.237 1.07 1.834 2.807 1.304 3.492.997.107-.775.418-1.305.762-1.604-2.665-.305-5.467-1.334-5.467-5.931 0-1.311.469-2.381 1.236-3.221-.124-.303-.535-1.524.117-3.176 0 0 1.008-.322 3.301 1.23.957-.266 1.983-.399 3.003-.404 1.02.005 2.047.138 3.006.404 2.291-1.552 3.297-1.23 3.297-1.23.653 1.653.242 2.874.118 3.176.77.84 1.235 1.911 1.235 3.221 0 4.609-2.807 5.624-5.479 5.921.43.372.823 1.102.823 2.222v3.293c0 .319.192.694.801.576 4.765-1.589 8.199-6.086 8.199-11.386 0-6.627-5.373-12-12-12z"/>
+                            </svg>
+                        </span>
+                    </div>
+                    <h3 class="text-2xl font-bold mb-3">ML Image Classifier</h3>
+                    <p class="text-gray-400 mb-4">Deep learning model for image classification using convolutional neural networks.</p>
+                    <div class="flex flex-wrap gap-2">
+                        <span class="px-3 py-1 bg-[rgba(0,255,136,0.1)] rounded-full text-sm" style="color: var(--primary);">Python</span>
+                        <span class="px-3 py-1 bg-[rgba(0,212,255,0.1)] rounded-full text-sm" style="color: var(--secondary);">PyTorch</span>
+                        <span class="px-3 py-1 bg-[rgba(255,0,128,0.1)] rounded-full text-sm" style="color: var(--accent);">CNN</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="text-center mt-12 reveal">
+                <a href="https://github.com/adrianwirawicaksana" target="_blank" class="btn-primary">
+                    <span class="relative z-10">View All Projects on GitHub</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="relative py-20">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="reveal">
+                <h2 class="text-5xl md:text-6xl font-bold mb-8 text-center" style="font-family: 'Syne', sans-serif;">
+                    Let's <span style="color: var(--primary);">Connect</span>
+                </h2>
+                <p class="text-xl text-center text-gray-300 mb-16">
+                    Have a project in mind or just want to chat about tech? I'd love to hear from you!
+                </p>
+            </div>
+
+            <div class="reveal grid md:grid-cols-3 gap-6 mb-12">
+                <a href="https://github.com/adrianwirawicaksana" target="_blank" class="tech-card p-6 rounded-xl text-center hover:scale-105 transition-transform">
+                    <div class="text-4xl mb-3">🐙</div>
+                    <h3 class="font-bold mb-2">GitHub</h3>
+                    <p class="text-sm text-gray-400">@adrianwirawicaksana</p>
+                </a>
+
+                <a href="https://www.instagram.com/n4d00yy" target="_blank" class="tech-card p-6 rounded-xl text-center hover:scale-105 transition-transform">
+                    <div class="text-4xl mb-3">📸</div>
+                    <h3 class="font-bold mb-2">Instagram</h3>
+                    <p class="text-sm text-gray-400">@n4d00yy</p>
+                </a>
+
+                <div class="tech-card p-6 rounded-xl text-center">
+                    <div class="text-4xl mb-3">🎓</div>
+                    <h3 class="font-bold mb-2">University</h3>
+                    <p class="text-sm text-gray-400">STEKOM University</p>
+                </div>
+            </div>
+
+            <div class="reveal tech-card p-8 rounded-2xl text-center">
+                <h3 class="text-2xl font-bold mb-4">📍 Location</h3>
+                <p class="text-gray-300 mb-2">Indonesia</p>
+                <p class="text-sm text-gray-400">Open to remote opportunities worldwide</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="relative py-8 border-t" style="border-color: rgba(0, 255, 136, 0.1);">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="text-center">
+                <p class="text-gray-400">
+                    &copy; 2026 Adrian Wira Wicaksana. Built with 
+                    <span style="color: var(--accent);">❤️</span> and 
+                    <span style="color: var(--primary);">Tailwind CSS</span>
+                </p>
+                <p class="text-sm text-gray-500 mt-2">
+                    Keep Learning 📚 | Keep Building 🚀
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Reveal on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.reveal').forEach((el) => observer.observe(el));
+
+        // Typing animation restart
+        setTimeout(() => {
+            const typingElement = document.querySelector('.typing');
+            if (typingElement) {
+                typingElement.style.animation = 'none';
+                setTimeout(() => {
+                    typingElement.style.animation = 'typing 3.5s steps(40, end), blink-caret 0.75s step-end infinite';
+                }, 100);
+            }
+        }, 3500);
+    </script>
+</body>
+</html>
